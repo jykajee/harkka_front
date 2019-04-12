@@ -21,6 +21,11 @@ class Muistiinpanot2 extends Component {
         this.poista = this.poista.bind(this);
     }
 
+    componentWillMount = () => {
+        this.props.fetchLista();
+    }
+
+    /*
     haeLista(){
         fetch(this.apiOsoite, {method:'GET'})
         .then(results => {
@@ -31,6 +36,7 @@ class Muistiinpanot2 extends Component {
                 return parsedData;
         }) 
     }
+    */
 
     poista(id) {
         let osoite = this.apiOsoite + id;
@@ -90,7 +96,7 @@ class Muistiinpanot2 extends Component {
                     </ButtonToolbar>
                 </div>
                 <div className="ListaItemit" comn>
-                    {muistiinp.map(mp => <MuistiinpanoItem key={mp.id} mpProp={mp} funktio={this.poista} />)}
+                    {this.props.muistiinpanot.map(mp => <MuistiinpanoItem key={mp.id} mpProp={mp} funktio={this.poista} />)}
                 </div>
                 <UusiMuistiinpanoModal show={this.state.modalShow} onHide={modalClose} lisaaMP={this.lisaaMuistiinpano} />
             </div>
