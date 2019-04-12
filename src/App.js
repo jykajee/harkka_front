@@ -11,7 +11,6 @@ class App extends Component {
   
   render() {
     const store = configureStore();
-    //const store = createStore(muistiinpanoApp);
     
     return (
       <Provider store={store}>
@@ -22,13 +21,12 @@ class App extends Component {
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
           crossorigin="anonymous"
           />
+
           <header className="App-header">
-
             <Muistiinpanot2 className="Muistiinpanot" />
-            
             <img alt="beautiful bill murray" className="billMurray" src="https://www.fillmurray.com/150/150"/>
-
           </header>
+          
         </div>
       </Provider>
     );

@@ -1,8 +1,9 @@
 import {
-    FETCH_LISTA_REQUEST, FETCH_LISTA_SUCCESS, FETCH_LISTA_FAILURE
+    FETCH_LISTA_REQUEST,
+    FETCH_LISTA_SUCCESS,
+    FETCH_LISTA_FAILURE
 } from '../actions/actions';
-//import { type } from 'os';
-//import { init } from 'events';
+
 
 const initialState = {
     muistiinpanoLista: { muistiinpanot: [], error: null, loading: false }
@@ -19,13 +20,7 @@ export default function(state = initialState, action) {
         case FETCH_LISTA_FAILURE:
             error = action.payload.data || { message: action.payload.message };
             return { ...state, muistiinpanoLista: { muistiinpanot: [], error: error, loading: false}};
-            /*return Object.assign({},state, {
-                muistiinpanoLista: [
-                    ...state.muistiinpanoLista,
-                    {muistiinpano: action.muistiinpano}
-                ]
-            })*/
+        default:
+            return state;
     }
-
-    return state;
 }

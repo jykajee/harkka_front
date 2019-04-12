@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import './Muistiinpanot2.css';
 import UusiMuistiinpanoModal from './UusiMuistiinpanoModal';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {fetchLista} from './actions/actions';
 
 
 class Muistiinpanot2 extends Component {
@@ -17,10 +19,6 @@ class Muistiinpanot2 extends Component {
             modalShow: false
         };
         this.poista = this.poista.bind(this);
-    }
-
-    componentDidMount() {
-        this.haeLista();                
     }
 
     haeLista(){
@@ -88,6 +86,7 @@ class Muistiinpanot2 extends Component {
                 <div className="row">
                     <ButtonToolbar>
                         <Button onClick={() => this.setState({modalShow: true})} >Lisää uusi</Button>   
+                        <Button onClick={() => this.props.fetchLista()} >Refresh</Button>
                     </ButtonToolbar>
                 </div>
                 <div className="ListaItemit" comn>
@@ -99,6 +98,7 @@ class Muistiinpanot2 extends Component {
     }
 }
 
+
 Muistiinpanot2.propTypes = {
     muistiinpanot: PropTypes.arrayOf(PropTypes.shape({
         otsikko: PropTypes.string.isRequired,
@@ -107,4 +107,11 @@ Muistiinpanot2.propTypes = {
     modalShow: PropTypes.bool.isRequired
 }
 
-export default Muistiinpanot2;
+const mapStateToProps = (state) => {
+    return { muistiinpanot: state.muistiinpanoLista.muistiinpanot };
+  }
+  
+export default connect(
+    mapStateToProps,
+    { fetchLista }
+)(Muistiinpanot2);
