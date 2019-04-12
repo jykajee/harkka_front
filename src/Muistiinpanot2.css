@@ -1,0 +1,13 @@
+Button {   
+    float: right;
+}
+
+.ListaItemit {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+MuistiinpanoItem {
+    position: relative;
+}
