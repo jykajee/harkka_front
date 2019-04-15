@@ -2,6 +2,13 @@ Button {
     float: right;
 }
 
+.row {
+    padding: 0vh 5vw 1vh;
+}
+.Otsikko {
+    
+}
+
 .ListaItemit {
     display: grid;
     grid-gap: 5px;

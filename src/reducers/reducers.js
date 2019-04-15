@@ -29,7 +29,8 @@ export default function(state = initialState, action) {
             return {...state, muistiinpanoLista:
                 {muistiinpanot: [action.payload, ...state.muistiinpanoLista.muistiinpanot], ...state.muistiinpanoLista}}
         case DELETE_MUISTIINPANO_SUCCESS:
-            const mpanot = state.muistiinpanoLista.muistiinpanot.filter((mp) => { return mp.id !== action.payload})
+        debugger;
+            const mpanot = state.muistiinpanoLista.muistiinpanot.filter((mp) => { return mp.id !== action.payload.id})
             return {...state, muistiinpanoLista: {...state.muistiinpanoLista, muistiinpanot: mpanot, error: null, loading: false}}
         case TOGGLE_ADD_MUISTIINPANO:
             return {...state, muistiinpanoLista: {...state.muistiinpanoLista, adding: (state.muistiinpanoLista.adding === false) ? true : false }}

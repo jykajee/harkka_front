@@ -1,0 +1,7 @@
+li {
+    list-style-type: none;
+    float: left;
+    padding: 0vh 1vw;
+    
+    background-color: aliceblue;;
+}

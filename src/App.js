@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Muistiinpanot2 from './Muistiinpanot2.js';
-import {createStore} from 'redux';
+import Muistiinpanot2 from './components/Muistiinpanot2.js';
+import NavBar from './components/NavBar.js';
 import {Provider} from 'react-redux';
-import muistiinpanoApp from './reducers/reducers';
 import configureStore from './configureStore';
+import {Switch, Route} from 'react-router-dom';
+import LoginForm from './components/LoginForm';
 
 
 class App extends Component {
@@ -21,11 +22,23 @@ class App extends Component {
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
           crossorigin="anonymous"
           />
-
           <header className="App-header">
-            <img alt="beautiful bill murray" className="billMurray" src="https://www.fillmurray.com/150/150"/>
-            <Muistiinpanot2 className="Muistiinpanot" />
+            <img alt="beautiful bill murray" className="BillMurray" src="https://www.fillmurray.com/150/150"/>
+            <div className="NavBar" >
+            <NavBar  />
+            </div>
+            
           </header>
+
+          <Switch>
+            <Route exact path="/" render={() =>(
+              <Muistiinpanot2 className="Muistiinpanot" />
+            )} />
+            
+            <Route path="/login" render={() =>(
+              <LoginForm />
+            )} />
+          </Switch>
           
         </div>
       </Provider>

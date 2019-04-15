@@ -2,12 +2,11 @@ import React,{Component}from 'react';
 import MuistiinpanoItem from './MuistiinpanoItem';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import './Muistiinpanot2.css';
 import UusiMuistiinpanoModal from './UusiMuistiinpanoModal';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchLista, postMuistiinpano, deleteMuistiinpano, toggleAddModal} from './actions/actions';
+import {fetchLista, postMuistiinpano, deleteMuistiinpano, toggleAddModal} from '../actions/actions';
 
 
 class Muistiinpanot2 extends Component {
@@ -90,10 +89,9 @@ class Muistiinpanot2 extends Component {
         let modalClose = () => {this.props.toggleAddModal();
                                 this.props.fetchLista();}
         console.log(this.state.muistiinp);
-        const {muistiinp} = this.state;
         return (
             <div>
-                <h1>Lista</h1>
+                <h1 className="Otsikko">Lista</h1>
                 <div className="row">
                     <ButtonToolbar>
                         <Button onClick={() => this.props.toggleAddModal()} >Lisää uusi</Button>   
