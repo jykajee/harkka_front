@@ -26,7 +26,7 @@ class UusiMuistiinpanoModal extends Component {
     handleSubmit(event) {
         this.props.lisaaMP(this.state);
         event.preventDefault();
-        this.setState({otsikko:"",sisalto:""});
+        this.setState({otsikko:"",sisalto:""});  
     }
 
 
@@ -46,14 +46,14 @@ class UusiMuistiinpanoModal extends Component {
                     </ModalTitle>
                 </ModalHeader>
                 <Modal.Body>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit} >
                         <Form.Group controlId="uusiOtsikko">
                             <Form.Label>Otsikko</Form.Label>
-                            <Form.Control name="otsikko" onChange={this.handleChange} type="textarea" rows="1" />
+                            <Form.Control name="otsikko" onChange={this.handleChange} type="textarea" rows="1" value={this.state.otsikko}/>
                         </Form.Group>
                         <Form.Group controlId="uusiSisalto">
                             <Form.Label>Sisältö</Form.Label>
-                            <Form.Control name="sisalto"  onChange={this.handleChange} type="textarea" rows="3" />                            
+                            <Form.Control name="sisalto"  onChange={this.handleChange} type="textarea" rows="3" value={this.state.sisalto} />                            
                         </Form.Group>
                         <Button variant="primary" type="submit">Lisää muistiinpano</Button>
                     </Form>

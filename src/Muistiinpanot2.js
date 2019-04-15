@@ -7,7 +7,7 @@ import './Muistiinpanot2.css';
 import UusiMuistiinpanoModal from './UusiMuistiinpanoModal';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchLista} from './actions/actions';
+import {fetchLista, postMuistiinpano, deleteMuistiinpano, toggleAddModal} from './actions/actions';
 
 
 class Muistiinpanot2 extends Component {
@@ -15,10 +15,10 @@ class Muistiinpanot2 extends Component {
         super(props);
         this.apiOsoite = 'http://localhost:8080/api/muistiinpanot/';
         this.state = {
-            muistiinp: [],
-            modalShow: false
+            //muistiinp: [],
+            //modalShow: false
         };
-        this.poista = this.poista.bind(this);
+        //this.poista = this.poista.bind(this);
     }
 
     componentWillMount = () => {
@@ -37,7 +37,7 @@ class Muistiinpanot2 extends Component {
         }) 
     }
     */
-
+    /*
     poista(id) {
         let osoite = this.apiOsoite + id;
         fetch(osoite, {
@@ -65,8 +65,11 @@ class Muistiinpanot2 extends Component {
         this.setState({muistiinp: array});
         //.then(res => console.log(res))
     }
+    /*
 
     lisaaMuistiinpano(muistiinpano){
+
+        /*
         console.log("tämä on muistiinpano jota lähetetään serverille -------->",JSON.stringify(muistiinpano));
         let muistiinpanoJson = JSON.stringify(muistiinpano);
         let request = {
@@ -79,11 +82,13 @@ class Muistiinpanot2 extends Component {
         ).then(results =>{
             console.log(results);
         })
+        
     }
+    */
 
     render() {
-        let modalClose = () => {this.setState ({modalShow: false});
-                                this.haeLista();}
+        let modalClose = () => {this.props.toggleAddModal();
+                                this.props.fetchLista();}
         console.log(this.state.muistiinp);
         const {muistiinp} = this.state;
         return (
@@ -91,14 +96,16 @@ class Muistiinpanot2 extends Component {
                 <h1>Lista</h1>
                 <div className="row">
                     <ButtonToolbar>
-                        <Button onClick={() => this.setState({modalShow: true})} >Lisää uusi</Button>   
+                        <Button onClick={() => this.props.toggleAddModal()} >Lisää uusi</Button>   
                         <Button onClick={() => this.props.fetchLista()} >Refresh</Button>
                     </ButtonToolbar>
                 </div>
                 <div className="ListaItemit" comn>
-                    {this.props.muistiinpanot.map(mp => <MuistiinpanoItem key={mp.id} mpProp={mp} funktio={this.poista} />)}
+                    {(!this.props.modalShow && !this.props.loading) ?
+                        this.props.muistiinpanot.map(mp => <MuistiinpanoItem key={mp.id} mpProp={mp} delMuistiinpano={ () => this.props.deleteMuistiinpano(mp.id)} />)
+                        : <p>LOADING...</p>}
                 </div>
-                <UusiMuistiinpanoModal show={this.state.modalShow} onHide={modalClose} lisaaMP={this.lisaaMuistiinpano} />
+                <UusiMuistiinpanoModal show={this.props.modalShow} onHide={modalClose} lisaaMP={this.props.postMuistiinpano} />
             </div>
         )
     }
@@ -114,10 +121,17 @@ Muistiinpanot2.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-    return { muistiinpanot: state.muistiinpanoLista.muistiinpanot };
+    return {muistiinpanot: state.muistiinpanoLista.muistiinpanot,
+            modalShow: state.muistiinpanoLista.adding,
+            loading: state.muistiinpanoLista.loading};
   }
   
 export default connect(
     mapStateToProps,
-    { fetchLista }
+    {
+        fetchLista,
+        postMuistiinpano,
+        deleteMuistiinpano,
+        toggleAddModal
+    }
 )(Muistiinpanot2);

@@ -23,8 +23,8 @@ class App extends Component {
           />
 
           <header className="App-header">
-            <Muistiinpanot2 className="Muistiinpanot" />
             <img alt="beautiful bill murray" className="billMurray" src="https://www.fillmurray.com/150/150"/>
+            <Muistiinpanot2 className="Muistiinpanot" />
           </header>
           
         </div>
